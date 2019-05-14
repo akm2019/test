@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="demo.torah.ware.mapper.BoardMapper">
+	<select id="boardList" resultType="hashmap">
+	    select * from AKM_BOARD
+	    order by boardIdx desc
+	    limit #{pageStart}, #{perPageNum}
+	</select>
+	
+	<select id="boardTotalCnt" resultType="int">
+	    select count(*) from AKM_BOARD
+	</select>
+	
+	<insert id="boardRegist">
+		insert into AKM_BOARD (title, content, writer, regIp, regDtime, regUserId)
+		values(#{title}, #{content}, #{writer}, '127.0.0.1', now(), #{regUserId})
+	</insert>
+	
+	<select id="boardView" resultType="map">
+		select * from AKM_BOARD where boardIdx = #{boardIdx}
+	</select>
+	
+	<update id="boardEdit">
+		update AKM_BOARD set title = #{title}, content = #{content}, writer = #{writer}, updDtime = now(), updIp = '127.0.0.1', updUserId = #{updUserId}
+		where boardIdx = #{boardIdx}
+	</update>
+	
+	<delete id="boardDelete">
+		delete from AKM_BOARD where boardIdx = #{boardIdx}
+	</delete>
+</mapper>

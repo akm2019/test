@@ -1,0 +1,42 @@
+spring:
+  datasource:
+    url : jdbc:log4jdbc:mysql://torah-mysql.zenice.kr:3306/pilot?useUnicode=true&characterEncoding=utf8
+    username: torah
+    password: ware0123
+    hikari:
+      connection-timeout: 5000
+      validation-timeout: 1000
+      maximum-pool-size: 30
+      minimum-idle: 2
+      connection-test-query: SELECT 1
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+
+    
+  devtools:
+    livereload:
+      enabled: true
+
+   
+  thymeleaf:
+    cache: false
+
+  cache:
+    jcache:
+      config: classpath:ehcache.xml
+
+
+mybatis: 
+  type-aliases-package: demo.torah.ware.mapper
+  mapper-locations: mybatis/mapper/**/*.xml
+ 
+
+
+logging:
+  level:
+    root: info
+    jdbc.sqlonly: debug
+    jdbc.resultsettable: debug
+    org.springframework.web: debug
+    org.ehcache: debug
+    demo.torah.ware: debug
+    

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<script th:inline="javascript">
+
+var message = [[${message}]];
+console.log(message);
+
+if(message !=null && message != ''){
+	alert(message);
+}
+
+
+</script>
+
+로그인
+<form action="loginExec" method="post">
+	아이디 : <input type="text" name="userId"/>
+	비밀번호 : <input type="password" name="userPass" />
+	<button>로그인</button>
+</form>
+</html>

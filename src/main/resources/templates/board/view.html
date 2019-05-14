@@ -1,0 +1,39 @@
+<!Doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+상세
+<form name="form" action="/board/edit">
+	제목 : <th:block th:text="${board.title}" />
+	내용 : <th:block th:text="${board.content}" />
+	글쓴이 : <th:block th:text="${board.writer}" />
+	작성일 : <th:block th:text="${board.regDtime}" />
+</form>
+
+
+<button type="button" th:onclick="'boardEdit('+${board.boardIdx}+')'">수정</button>
+<button type="button" th:onclick="'boardDel('+${board.boardIdx}+')'">삭제</button>
+
+
+
+<script type="text/javascript" th:inline="javascript">
+	var f = document.form;
+	
+	var boardEdit = function(boardIdx){
+// 		alert(boardIdx);
+		f.action="/board/edit/"+boardIdx;
+		f.submit();
+	}
+	
+	var boardDel = function(boardIdx){
+// 		alert(boardIdx);
+		if(confirm("삭제하시겠습니까?")){
+			f.method="post";
+			f.action="/board/delete/"+boardIdx;
+			f.submit();
+		}
+	}
+
+</script>
+</body>
+</html>

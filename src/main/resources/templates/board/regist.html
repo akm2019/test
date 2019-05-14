@@ -1,0 +1,11 @@
+<!Doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+등록
+<form action="/board/registExec" method="post">
+제목 : <input type="text" name="title" />
+글쓴이 : <input type="text" name="writer" th:value="${member.userName}"/>
+비밀번호 : <input type="text" name="pass" />
+내용 : <textarea name="content"></textarea>
+<button>등록</button>
+</form>
+</html>

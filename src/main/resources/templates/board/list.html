@@ -1,0 +1,90 @@
+<!Doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<style>
+span.active {
+	font-size : 20px;
+	color : red;
+}
+</style>
+
+</head>
+<body>
+목록
+<form id="boardForm" name="boardForm" action="/board/view">
+
+
+	<table border="1" style="margin:auto;">
+		<colgroup>
+		<col width="150px">
+		<col width="250px">
+		<col width="150px">
+		<col width="200px">
+		<col width="150px">
+		</colgroup>
+		<tr>
+			<th>No</th>
+			<th>title</th>
+			<th>글쓴이</th>
+			<th>등록일</th>
+			<th>조회수</th>
+		</tr>
+		
+		<tr th:each="data, status :${list}" th:onclick="'boardView('+${data.boardIdx}+')'" style="cursor: pointer">
+			<td th:text="${(pageMaker.paging.page -1) * pageMaker.paging.perPageNum + status.index + 1}"></td>
+			<td th:text="${data.title}"></td>
+			<td th:text="${data.writer}"></td>
+			<td><th:block th:text="${#dates.format(data.regDtime, 'yyyy-MM-dd HH:mm:ss')}" /></td>
+			<td th:text="${data.hits}"></td>
+		</tr>
+		
+		
+	</table>
+	
+	<!-- paging -->
+	<div style="text-align:center;">
+		<!-- 맨처음 -->
+		 <th:block th:if="${pageMaker.prev} == true">
+         	<a th:href="@{/board/list(page=0, perPageNum=${pageMaker.paging.perPageNum})}">&laquo;</a>
+         </th:block>
+         <!-- 이전 -->
+		 <th:block th:if="${pageMaker.prev} == true">
+         	<a th:href="@{/board/list(page=${pageMaker.startPage}-1,perPageNum=${pageMaker.paging.perPageNum})}">&#60;</a>
+         </th:block>
+          <!-- 페이지표시 -->
+         <th:block th:each="data, status : ${#numbers.sequence(pageMaker.startPage, pageMaker.endPage)}">
+	         <span th:classappend="${pageMaker.paging.page} == ${data}? 'active' : null">
+	           <a th:href="@{/board/list(page=${data}, perPageNum=${pageMaker.paging.perPageNum})}" th:text="${data}"></a>
+	         </span>
+         </th:block>
+          <!-- 다음 -->       
+         <th:block th:if="${pageMaker.next} == true and ${pageMaker.endPage > 0}">
+         	<a th:href="@{/board/list(page=${pageMaker.endPage}+1, perPageNum=${pageMaker.paging.perPageNum})}">&#62;</a>
+         </th:block>
+          <!-- 맨끝-->
+         <th:block th:if="${pageMaker.next} == true and ${pageMaker.endPage > 0}">
+         	<a th:href="@{/board/list(page=${pageMaker.totalCount / pageMaker.paging.perPageNum + (pageMaker.totalCount % paging.getPerPageNum() > 0 ? 1 : 0)}, perPageNum=${pageMaker.paging.perPageNum})}">&raquo;</a>
+         </th:block>
+	</div>
+	<!--// paging -->
+</form>
+	
+	<button onclick="location.href='/board/regist'">글쓰기</button>
+
+
+<script type="text/javascript" th:inline="javascript">
+	var f = document.boardForm;
+
+	var boardView = function(boardIdx){
+		
+		f.method = "get";
+		f.action = "/board/view/"+boardIdx;
+		f.submit();
+	}
+
+</script>
+
+</body>
+</html>

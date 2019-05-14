@@ -1,0 +1,19 @@
+<!Doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+수정
+<form method="post" action="/board/editExec">
+<input type="hidden" name="boardIdx" th:value="${board.boardIdx}" />
+
+제목 : <input type="text" name="title" th:value="${board.title}" />
+내용 : <input type="text" name="content" th:value="${board.content}" />
+글쓴이 : <input type="text" name="writer" th:value="${board.writer}" />
+작성일 : <th:block th:text="${board.regDtime}" />
+
+<button>저장</button>
+</form>
+
+
+
+
+
+</html>

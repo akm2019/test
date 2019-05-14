@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="demo.torah.ware.mapper.MemberMapper">
+	<insert id="memberRegist">
+		insert into AKM_MEMBER (userId, userPass, userName, phone, email, regDtime, regIp)
+		value(#{userId}, #{userPass}, #{userName}, #{phone}, #{email}, now(), '127.0.0.1')
+	</insert>
+	
+	<select id="memberLogin" resultType="map">
+		select * from AKM_MEMBER
+		where userId = #{userId} and userPass = #{userPass}
+	</select>
+
+</mapper>
