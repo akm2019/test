@@ -1,16 +1,16 @@
 package demo.torah.ware.service.impl;
 
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Service;
-
 import demo.torah.ware.mapper.BoardMapper;
 import demo.torah.ware.paging.Paging;
 import demo.torah.ware.service.BoardService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
+
 
 
 @Service
@@ -21,10 +21,10 @@ public class BoardServiceImpl implements BoardService {
 	public BoardMapper boardMapper;
 	
 	@Override
-	@Cacheable(value="boardCache", key = "#currentPage")
+	@Cacheable(value="akm_boardCache", key = "#currentPage")
 	public List<Map<String,Object>> boardList(int currentPage, Paging paging){
 		System.out.println("@@@@@@ serviceImpl");
-//		 log.debug("@@@@@@@@@@ log를 찍어보고싶다...");
+		 log.debug("@@@@@@@@@@ log를 찍어보고싶다...");
 		try {
             Thread.sleep(3000);
         }catch (Exception ex){

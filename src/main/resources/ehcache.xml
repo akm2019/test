@@ -5,7 +5,7 @@
             http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.0.xsd
             http://www.ehcache.org/v3/jsr107 http://www.ehcache.org/schema/ehcache-107-ext-3.0.xsd">
 
-    <cache alias="boardCache">
+    <cache alias="akm_boardCache">
         <key-type>java.lang.Integer</key-type>
         <value-type>java.util.List</value-type>
         <expiry>
